@@ -1,0 +1,66 @@
+
+
+<div class="clr-row flex-items-md-center mt-5">
+  <div class="col-sm-12 col-md-8 col-lg-6 login-box">
+
+    <div class="card">
+        <ng-container *ngIf="!signupSuccess; else elseTemplate">
+            <div class="card-header">
+                Signup
+              </div>
+              <div class="card-block">
+                
+                <form clrForm [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+                  <section class="form-block">
+                    <clr-input-container>
+                      <label for="email" class="lbl">Email</label>
+                      <input clrInput placeholder="Email" type="email" name="email" formControlName="email" size="35" />
+                      <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+                      <clr-control-error *clrIfError="'minlength'">Wrong email format</clr-control-error>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                      <label for="password" class="lbl">Password</label>
+                      <input clrInput type="password" id="password" placeholder="Password" formControlName="password" size="35">
+                      <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+                      <clr-control-error *clrIfError="'minlength'">Must be at least 8 characters</clr-control-error>
+                      <clr-control-error *clrIfError="'pattern'">Password must contain at least one letter, at least one number, and be longer than six charaters</clr-control-error>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                      <label for="confirmPassword" class="lbl">Password</label>
+                      <input clrInput type="password" id="confirmPassword" placeholder="Confirm password" formControlName="confirmPassword" size="35"
+                      [ngStyle]="{'border-bottom-color': confirmPassword.dirty && registrationForm.hasError('passwordmismatch') ? '#c92100' : '', 'background-size': confirmPassword.dirty && registrationForm.hasError('passwordmismatch') ? '0 100%' : ''}">
+                      <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+                      <clr-control-error *clrIfError="'mismatch'">Must be at least 8 characters</clr-control-error>
+                      <clr-control-helper class="text-danger" *ngIf="confirmPassword.dirty && registrationForm.hasError('passwordmismatch')">Password mismatch</clr-control-helper>
+                    </clr-input-container>
+        
+                  </section>
+                </form>
+                <p class="text-danger text-center" *ngIf="errorMessage !==''">{{errorMessage}}</p>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-outline" (click)="onSubmit()" [disabled]="registrationForm.invalid">SUBMIT</button>
+                <button class="btn btn-link" (click)="goHomePage()">Cancel</button>
+              </div>
+          </ng-container>
+          <ng-template #elseTemplate>
+              <div class="card-header">
+                  Signup
+                </div>
+                <div class="card-block">
+                  <p class="text-success" >Account was successfully created!!</p>
+                  <br>
+                </div>
+                <div class="card-footer">
+                  <button class="btn btn-outline" (click)="goLoginPage()">Login</button>
+                  <button class="btn btn-link" (click)="goHomePage()">Home</button>
+                </div>
+          </ng-template>
+          
+      
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,173 @@
+<div class="clr-row">
+  <div class="clr-col-sm-12 clr-col-md-12 clr-col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <section class="form-block">
+          <div class="form-group">
+            <div class="checkbox">
+              <input type="checkbox" id="formBuilder" name="formBuilder" [(ngModel)]="component.formBuilder"
+                #formBuilder>
+              <label for="formBuilder">Use FormBuilder</label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" id="formsUI" name="formsUI" [(ngModel)]="project.formsUI" #formsUI>
+              <label for="formsUI">Bootsrap UI</label>
+            </div>
+            <div class="checkbox disabled">
+              <input type="checkbox" id="formsMUI" name="formsMUI" [(ngModel)]="project.formsMUI" [disabled]="true"
+                #formsMUI>
+              <label for="formsMUI">Angular Material UI</label>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="card-block">
+
+        <div>
+          <form #fieldsForm="ngForm">
+            <section class="form-block">
+              <div class="form-group">
+                <label for="label">Label</label>
+                <input type="text" id="label" name="label" [(ngModel)]="formFields.label" #label="ngModel" required>
+                <div *ngIf="label.invalid && label.touched">
+                    <p class="text-danger" *ngIf="label.errors">Required</p>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="propertyName">Property name</label>
+                <input type="text" id="propertyName" name="propertyName" [(ngModel)]="formFields.propertyName"
+                  maxlength="14" #propertyName="ngModel" required>
+                  <div *ngIf="propertyName.invalid && propertyName.touched">
+                    <p class="text-danger" *ngIf="propertyName.errors">Required</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputType">Input type</label>
+                <div class="select">
+                  <select class="invalid" id="inputType" name="inputType" [(ngModel)]="formFields.inputType"
+                    (change)="onInputTypeChange(formFields.inputType)">
+                    <option value="text">Text</option>
+                    <option value="password">Password</option>
+                    <option value="email">Email</option>
+                    <option value="checkbox">Checkbox</option>
+                    <option value="radio">Radio</option>
+                    <option value="date">Date</option>
+                    <option value="number">Number</option>
+                    <option value="textarea">Textarea</option>
+                    <option value="select">Select</option>
+                    <option value="phone">Phone</option>
+                    <option value="color">Color</option>
+                    <option value="file">File</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label for="required">Required</label>
+                <div class="checkbox">
+                  <input type="checkbox" id="required" name="required" [(ngModel)]="formFields.required">
+                  <label for="required"></label>
+                </div>
+              </div>
+
+              <div class="form-group" *ngIf="value">
+                <label for="value">Value</label>
+                <input type="text" id="value" name="value" [(ngModel)]="formFields.value" #value="ngModel"
+                  (focus)="valueOnFocus(formFields.label)" required>
+              </div>
+              <div *ngIf="minMax">
+                <div class="form-group">
+                  <label for="placeholder">Placeholder</label>
+                  <input type="text" id="placeholder" name="placeholder" [(ngModel)]="formFields.placeholder"
+                    #placeholder="ngModel" (focus)="placeholderOnFocus(formFields.label)">
+                </div>
+                <div class="form-group" *ngIf="formFields.inputType !== 'textarea'">
+                  <label for="maxLength">Max length</label>
+                  <input type="number" min="0" id="maxLength" name="maxLength" [(ngModel)]="formFields.maxLength">
+                </div>
+                <div class="form-group" *ngIf="formFields.inputType !== 'textarea'">
+                  <label for="minLength">Min length</label>
+                  <input type="number" min="0" id="minLength" name="minLength" [(ngModel)]="formFields.minLength">
+                </div>
+              </div>
+              <div *ngIf="formFields.inputType === 'phone'">
+                <ng-container *ngIf="phoneFormatStringElse; else elsePhone">
+                  Phone format is {{phoneFormatString}}
+                  <button class="btn btn-link" (click)="editPhoneFormat()">Edit</button>
+                </ng-container>
+                <ng-template #elsePhone>
+                    <div class="form-group">
+                    <label for="phoneFormatString">Phone format</label>
+                    <input type="text" id="phoneFormatString" name="phoneFormatString" [(ngModel)]="phoneFormatString" #formatString="ngModel" appPhoneFormat pattern="" required>
+                    <div *ngIf="formatString.invalid && formatString.touched">
+                        <p class="text-danger" *ngIf="formatString.errors">Required</p>
+                        <!-- <p class="text-danger" *ngIf="formatString.error.pattern">Required</p> -->
+                    </div>
+                    <p>Enter phone format using (,), *, - and whitespace.</p>
+                    <p class="mt"><span class="text-warning">(123) 456-7890</span> enter as <span class="text-warning">(***) ***-****</span></p>
+                  </div>
+                </ng-template>
+                
+              </div>
+            </section>
+
+          </form>
+
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-link" [disabled]="fieldsForm.invalid" (click)="saveField()">Save</button>
+        <button class="btn btn-link" (click)="reset()">Reset</button>
+        <button class="btn btn-link text-danger" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="clr-col-sm-12 clr-col-md-12 clr-col-lg-6">
+    <div *ngIf="this.component.forms">
+      <div class="card" *ngFor="let field of this.component.forms; let i=index">
+        <div class="card-block">
+          <ul>
+            <li>Label: <span class="field">{{field.label}}</span></li>
+            <li>Property name: <span class="field">{{field.propertyName}}</span></li>
+            <li>Input type: <span class="field">{{field.inputType}}</span></li>
+            <li *ngIf="field.placeholder">Placeholder: <span class="field">{{field.placeholder}}</span></li>
+            <li *ngIf="field.required">Required: <span class="field">{{field.required}}</span></li>
+            <li *ngIf="field.maxLength">Max length: <span class="field">{{field.maxLength}}</span></li>
+            <li *ngIf="field.minLength">Min length: <span class="field">{{field.minLength}}</span></li>
+            <li *ngIf="field.radio">Value: <span class="field">{{field.value}}</span></li>
+            <li *ngIf="field.rows">Rows: <span class="field">{{field.rows}}</span></li>
+
+          </ul>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-sm btn-link" (click)="editField(i, field.inputType)">Edit</button>
+          <button class="btn btn-sm btn-link text-danger" (click)="remove(i)">Remove</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<clr-modal [(clrModalOpen)]="propertyNameExist" [clrModalSize]="'sm'">
+  <h3 class="modal-title">Property exist</h3>
+  <div class="modal-body">
+    <p>Enter new property name.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="propertyNameExist = false">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="saveProjectModal" [clrModalSize]="'sm'">
+  <h3 class="modal-title"></h3>
+  <div class="modal-body">
+    <p>Save changes</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="saveProjectModal = false">Ok</button>
+  </div>
+</clr-modal>

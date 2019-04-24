@@ -1,0 +1,15 @@
+<div>
+  <form>
+    <section class="form-block">
+      <div class="form-group">
+        <input type="text" 
+            id="newName" 
+            name="newName" 
+            [placeholder]="nameToEdit" 
+            [size]="size" required 
+            (keyup.enter)="saveName()"
+            [(ngModel)]="newName" 
+            #newNameRef="ngModel">
+      </div>
+    </section>
+  </form>

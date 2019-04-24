@@ -1,0 +1,50 @@
+*, ::after, ::before {
+    box-sizing: initial; 
+}
+
+.header-actions-right .nav-link {
+    width: 1.5rem !important;
+}
+
+.login {
+    display: none;
+}
+.login-icon {
+    display: inline;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+}
+
+.nav-link:hover .nav-link-text {
+    color: white;
+}
+
+
+
+
+
+@media (min-width:575px)  { /* not mobile */
+    *, ::after, ::before {
+        box-sizing: inherit; 
+   }
+   .header-actions-right .nav-link {
+    width: 1.8rem !important;
+    }
+
+    .login {
+        display: inline;
+    }
+
+    .login-icon {
+        display: none;
+    }
+
+    .title {
+        margin-left: 50px;
+    }
+
+
+}
+

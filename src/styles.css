@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+html,body {
+    height:100%;
+}
+
+.header-actions{
+    margin-right: 0;
+}
+
+pre{
+    background-color: white;
+}
+
+.white{
+    fill: white;
+}
+.green{
+    fill: green;
+}
+.red{
+    fill: red;
+}
+
+.white:hover{
+    fill: lightblue;
+}
+
+.col-sm-12.col-md-12.col-lg-10 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.rem-left-1{
+    margin-left: 1rem;
+}
+
+.rem-right-1{
+    margin-right: 1rem;
+}
+
+clr-icon{
+    cursor: pointer;
+}
+
+clr-dropdown-menu.dropdown-menu {
+    margin-top: -0.3rem;
+}
+
+.header-actions-right .nav-link {
+    width: 1.8rem !important;
+}
+
+.header-actions-right{
+    width: 5rem;
+}
+
+.mb-1{
+    margin-bottom: 1rem;
+}
+
+
+
+
+@media (min-width:575px)  { 
+
+    .header-actions{
+        margin-right: 100px;
+    }
+
+    .mt-5 {
+        margin-top: 5rem;
+    }
+}

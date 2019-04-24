@@ -1,0 +1,13 @@
+.main-container .content-container .content-area {
+    padding: 0.5rem 0.5rem;
+}
+
+
+
+
+@media (min-width:575px)  { /* not mobile */
+
+    .main-container .content-container .content-area { /* back to clarity standart */
+        padding: 1rem;
+    }
+}

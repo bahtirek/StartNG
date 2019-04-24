@@ -1,0 +1,34 @@
+<div class="clr-row flex-items-md-center mt-5">
+    <div class="col-sm-12 col-md-8 col-lg-6 login-box">
+
+        <div class="card">
+            <div class="card-header">
+                Login
+            </div>
+            <div class="card-block">
+                    <form clrForm [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+                            <section class="form-block">
+                              <clr-input-container>
+                                <label for="email" class="lbl">Email</label>
+                                <input clrInput placeholder="Email" type="email" name="email" formControlName="email" size="35" />
+                                <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+                              </clr-input-container>
+                  
+                              <clr-input-container>
+                                <label for="password" class="lbl">Password</label>
+                                <input clrInput type="password" id="password" placeholder="Password" formControlName="password" size="35">
+                                <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+                              </clr-input-container>
+                            </section>
+                          </form>
+                          <p class="text-danger text-center" *ngIf="errorMessage !==''">{{errorMessage}}</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-outline" (click)="onSubmit()" [disabled]="loginForm.invalid">SUBMIT</button>
+                <button class="btn btn-link" (click)="goHomePage()">Cancel</button>
+                <button class="btn btn-link right" (click)="googleLogin()">Google login</button>
+            </div>
+        </div>
+    </div>
+
+</div>

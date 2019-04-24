@@ -1,0 +1,83 @@
+
+<div class="clr-row flex-items-md-center">
+        <div class="clr-col-sm-12 clr-col-md-8 clr-col-lg-6">
+
+                <div class="card">
+                        <div class="card-header">
+                            Projects
+                        </div>
+                        <div class="card-block">
+<table class="table-noborder">
+    <tbody>
+        <tr *ngFor="let project of collection; let i = index">
+            <td class="left  project"> 
+                {{project.name}}
+                
+            </td>
+            <td>
+                
+                        <!-- <a (click)="onEditProjectName(i, project.name)" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                                <clr-icon shape="pencil" class="" ></clr-icon> 
+                                <span class="tooltip-content">Edit project name</span>
+                            </a> -->
+                        <a [routerLink]="['../newproject/', i]" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                                <clr-icon shape="pencil" class="" ></clr-icon> 
+                                <span class="tooltip-content">Edit project name</span>
+                            </a>
+
+                            <a (click)=getProject(project.pid) role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                                <clr-icon shape="tree-view" class="rem-left-1" ></clr-icon> 
+                                <span class="tooltip-content">Go to components</span>
+                            </a>
+                            <a (click)="deleteProjectModal(i)" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                                <clr-icon shape="trash" class=" rem-left-1" ></clr-icon>
+                                <span class="tooltip-content">Delete project</span>
+                            </a> 
+                            <a (click)="downloadProject(i)" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                                <clr-icon shape="download" class=" rem-left-1" ></clr-icon>
+                                <span class="tooltip-content">Download project</span>
+                            </a> 
+                
+            </td>
+            <!-- <td class="left  project"  *ngIf="project.editName"> 
+                <form>
+                    <section class="form-block">
+                      <div class="form-group">
+                        <input type="text" 
+                            id="newName" 
+                            name="newName" 
+                            [placeholder]="nameToEdit" 
+                            [size]="size" required 
+                            (keyup.enter)="saveEditedName()"
+                            [(ngModel)]="newName" 
+                            #newNameRef="ngModel">
+                      </div>
+                    </section>
+                  </form>
+            </td>
+            <td  *ngIf="project.editName">
+                <a (click)="saveEditedName()" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                    <clr-icon shape="check" class="green" ></clr-icon> 
+                    <span class="tooltip-content">Save</span>
+                </a>
+                <a (click)="project.editName=false" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                    <clr-icon shape="times" class="rem-left-1 red" ></clr-icon> 
+                    <span class="tooltip-content">Cancel</span>
+                </a>
+            </td> -->
+        </tr>
+    </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<clr-modal [(clrModalOpen)]="showDeleteProjectModal">
+    <h3 class="modal-title">Delete project</h3>
+    <div class="modal-body">
+        <p>Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="showDeleteProjectModal = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onDeleteProject()">Delete</button>
+    </div>
+</clr-modal>

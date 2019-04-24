@@ -1,0 +1,152 @@
+.form-group{
+    padding-left: 0;
+}
+
+.component-name{
+    padding-top: 0.5rem;
+}
+.component-edit{
+    padding-top:0;
+}
+
+td{
+    padding: 0.3rem;
+}
+
+.pd-0{
+    padding: 0;
+}
+.mr-0{
+    margin: 0;
+}
+
+.width-10{
+    width: 10%;
+}
+
+.width-20{
+    width: 20%;
+}
+.width-25{
+    width: 25%;
+}
+
+.width-30{
+    width: 30%;
+}
+.width-33{
+    width: 33.33%;
+}
+
+.width-40{
+    width: 40%;
+}
+
+.width-50{
+    width: 50%;
+}
+
+.width-60{
+    width: 60%;
+}
+
+.col-sm-12.col-md-12.col-lg-6 {
+    padding-right: 0.5rem;
+    padding-left: .2rem;
+}
+.card-block {
+    padding: .3rem .3rem;
+}
+
+table{
+    table-layout:fixed;
+  }
+
+td{
+    word-break: break-all ;
+}
+
+.word-break{
+    word-break: break-all;
+}
+h3{
+    text-align: center;
+}
+
+.trash{
+    margin-top: 0.4rem;
+}
+table{
+    table-layout: auto;
+  }
+
+.pencil{
+    margin-left: -1rem;
+}
+
+.component-name-form{
+    border: solid #ffd37d 1px;
+    padding: 0.2rem;
+    border-radius: 0.15rem;
+}
+
+.right{
+    text-align: right;
+}
+
+.clr-select{
+    margin-left: 0.5rem;
+}
+
+.add-comp{
+    margin-bottom: 0.5rem;
+}
+
+label.clr-control-label {
+    font-weight: 100;
+    font-size: 0.6rem;
+    display: block;
+    color: #4c4747;
+}
+
+@media (min-width:575px)  { /* not mobile */
+    .form-group{
+        padding-left: 6rem;
+    }
+    .css{
+        padding-left: 0 !important;
+    }
+
+    .pd-0{
+        padding: 0;
+    }
+    .mr-0{
+        margin: 0;
+    }
+
+    .col-sm-12.col-md-12.col-lg-6 {  /* back to clarity standart */
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .card-block {
+        padding: .5rem .75rem; /* back to clarity standart */
+    }
+
+    h3{
+        text-align: left;
+    }
+
+    table{
+        table-layout: auto;
+      }
+
+    .auth{
+        z-index:1 !important;
+        left: 25px !important;
+        top: 4px !important;
+
+    }
+
+    
+}

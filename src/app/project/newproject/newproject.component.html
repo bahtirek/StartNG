@@ -1,0 +1,46 @@
+
+<div class="clr-row flex-items-md-center">
+      <div class="clr-col-sm-12 clr-col-md-8 clr-col-lg-6">
+      
+    <div class="card">
+          <div class="card-header">
+            {{editSave}}
+          </div>
+          <div class="card-block">
+            
+              <div>
+                  <form>
+                      <section class="form-block">
+                        <div class="form-group">
+                              <label for="newProjectName">Project name</label>
+                              <input 
+                                type="text" 
+                                id="newProjectName" 
+                                name="newProjectName" 
+                                [placeholder]="placeHolder" 
+                                size="40"
+                                required
+                                (keyup.enter)="createProject()" 
+                                [(ngModel)]="newProjectName"
+                                #newProjectNameRef="ngModel">
+                          </div>
+                      </section>
+                      
+                    </form> 
+                    <button class="btn btn-outline" [disabled]="!newProjectNameRef.valid" (click)="createProject()">Save</button>
+                    <button class="btn btn-outline-danger"  (click)="cancel()">Cancel</button>
+              </div>
+              </div>
+              </div>
+</div>
+</div>
+
+<clr-modal [(clrModalOpen)]="projectExistModal" [clrModalSize]="'sm'">
+    <h3 class="modal-title">Project exist</h3>
+    <div class="modal-body">
+        <p>Enter new project name.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="projectExistModal = false">Ok</button>
+    </div>
+    </clr-modal>
