@@ -1,8 +1,6 @@
 import { ChildRoute } from './../data/childRoute.interface';
-import { Child } from './../data/child.interface';
 import { Project } from '../data/project.interface';
 import { Injectable } from '@angular/core';
-import { ProjectServices } from './project.service';
 import { Template } from './template.service';
 import { HelperService } from './helper.service';
 import { Comp } from '../data/comp.interface';
@@ -25,9 +23,6 @@ constructor(private projectsService: ProjectsServices, public temp: Template, pu
 }
 
   setComponent(component: Comp, canActivate): any {
-    //console.log(component.name)
-    //console.log(component)
-    //console.log(JSON.parse(JSON.stringify(this.project.routes)))
     let importIndex = component.parentIndex;
     if(component.parentIndex !== component.moduleIndex) importIndex = component.moduleIndex;
     
@@ -46,11 +41,6 @@ constructor(private projectsService: ProjectsServices, public temp: Template, pu
         this.addComponent(component);
       } 
     }
-
-    if (!component.module && component.phoneFormat) {
-      this.project.components[component.moduleIndex].phoneFormat = true;
-    }
-    //console.log(JSON.parse(JSON.stringify(this.project.routes)))
   }
 
   async pushToRoutes(component: Comp, canActivate){

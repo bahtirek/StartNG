@@ -5,6 +5,7 @@ import { ProjectsServices } from '../../services/projects.service';
 import { EditNameComponent } from '../edit-name/edit-name.component';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -27,7 +28,7 @@ export class ProjectsComponent implements OnInit {
   size = 25;
   
 
-  constructor(private projectsServices: ProjectsServices, private auth: AuthService) { }
+  constructor(private projectsServices: ProjectsServices, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
 
@@ -85,38 +86,22 @@ export class ProjectsComponent implements OnInit {
   /* ********************************************************** */
 
   // EDIT PROJECT NAME
-  onEditProject(index) {
-    //console.log(index);
-  }
 
   onEditProjectName(index, name) {
-    //console.log(index, name)
-    //console.log(this.collection[index])
     if ( this.currentNameToEdit !== undefined ) {
       this.collection[this.currentNameToEdit].editName = false;
     }
-    this.newName = name;
+    this.newName = name.trim();
     this.currentNameToEdit = index;
-    //console.log(index, name);
     this.collection[index].editName = true;
   }
 
-  saveEditedName(name) {
-    /* const name = this.nameComponent.newName.trim();
-    if (name !== '') {
-      this.projects[this.currentNameToEdit].name = name;
-      this.projects[this.currentNameToEdit].editName = false;
-      this.projectsServices.updateProjects(this.projects);
-    }
-    this.projects[this.currentNameToEdit].editName = false;
-    console.log(this.projects) */
-  }
 
   // END OF EDIT PROJECT NAME
 
   /* ********************************************************** */
 getProject(pid){
-  this.projectsServices.getProject(pid);
+  this.projectsServices.getProject(pid, true);
 }
 
 }

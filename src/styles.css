@@ -61,8 +61,7 @@ clr-dropdown-menu.dropdown-menu {
 
 
 
-@media (min-width:575px)  { 
-
+@media (min-width: 576px) {
     .header-actions{
         margin-right: 100px;
     }
@@ -71,3 +70,22 @@ clr-dropdown-menu.dropdown-menu {
         margin-top: 5rem;
     }
 }
+
+ /* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    th {
+        width: 40%
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: 1.25rem;
+        font-size: 1rem;
+    }
+}
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { }

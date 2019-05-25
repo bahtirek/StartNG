@@ -5,3 +5,33 @@
 video, iframe {
     outline: none;
 }
+
+.steps {
+    padding: 0;
+}
+
+
+ /* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .steps {
+        margin-left: 30px;
+    }
+}
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .steps {
+        margin-left: 12px;
+    }
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    .steps {
+        margin-left: 60px;
+    }
+}
+
+@media (min-width: 1400px) { 
+    .steps {
+        margin-left: 160px;
+    }
+}

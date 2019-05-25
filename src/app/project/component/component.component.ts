@@ -7,7 +7,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import auth from '../../data/auth';
 import { HeaderService } from '../../services/header.service';
 import { ProjectsServices } from '../../services/projects.service';
-import { componentFactoryName } from '@angular/compiler';
 
 @Component({
   selector: 'app-component',

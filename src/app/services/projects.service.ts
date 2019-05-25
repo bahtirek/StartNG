@@ -62,7 +62,7 @@ export class ProjectsServices {
     private projectDoc: AngularFirestoreDocument<Project>;
     project: Observable<any>;
 
-    getProject(pid) {
+    getProject(pid, navigate) {
         this.getProjectDoc(pid)
             .then(
               () =>  {this.project.subscribe(
@@ -70,7 +70,11 @@ export class ProjectsServices {
                         if (result) {
                             this.currentProject = result;
                             this.saveToLoc(this.currentProject);
-                            this.router.navigate(['project/', this.currentProject.name, '0']);
+                            if(navigate) {
+                                navigate = false
+                                this.router.navigate(['project/', this.currentProject.name, '0']);
+                            }
+                            
                         }
                         
                     }
@@ -140,29 +144,22 @@ export class ProjectsServices {
         if (this.projectDoc === undefined) {
             this.getProjectDoc(this.currentProject.pid).then(
                 () => {
-                    this.projectDoc.update({components: this.currentProject.components, ids: this.currentProject.ids, phone: this.currentProject.phone, phoneFormat: this.currentProject.phoneFormat})
+                    if (this.currentProject.phoneFormat) {
+                        this.projectDoc.update({components: this.currentProject.components, ids: this.currentProject.ids, phone: this.currentProject.phone, phoneFormat: this.currentProject.phoneFormat})
+                    } else {
+                        this.projectDoc.update({components: this.currentProject.components})
+                    }
+                    
                 }
             )
         } else {
-            this.projectDoc.update({components: this.currentProject.components, ids: this.currentProject.ids, phone: this.currentProject.phone, phoneFormat: this.currentProject.phoneFormat})
+            if (this.currentProject.phoneFormat) {
+                this.projectDoc.update({components: this.currentProject.components, ids: this.currentProject.ids, phone: this.currentProject.phone, phoneFormat: this.currentProject.phoneFormat})
+            } else {
+                this.projectDoc.update({components: this.currentProject.components})
+            }
         }
     }
-
-/*     async saveProjectScssUI(){
-        if (this.projectDoc === undefined) {
-            this.getProjectDoc(this.currentProject.pid).then(
-                () => {
-                    this.projectDoc.update({scss: this.currentProject.scss, formsUI: this.currentProject.formsUI})
-                }
-            )
-        } else {
-            this.projectDoc.update({scss: this.currentProject.scss, formsUI: this.currentProject.formsUI})
-        }
-    } */
-
-
-
-
 
     reset(){
         for (const component of this.currentProject.components) {

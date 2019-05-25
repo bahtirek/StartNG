@@ -9,7 +9,6 @@ import { ClarityModule} from '@clr/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectServices } from './services/project.service';
@@ -23,6 +22,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule} from '@angular/fire/auth';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { RouterModule } from '@angular/router';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LoginComponent } from './login/login.component';
 //import { SignupComponent } from './signup/signup.component';
 
 export const config = {
@@ -61,7 +62,8 @@ export const config = {
       ProjectServices,
       ProjectsServices,
       ZipService,
-      HelperService
+      HelperService, 
+      {provide: LocationStrategy, useClass: HashLocationStrategy}
    ],
    bootstrap: [
       AppComponent

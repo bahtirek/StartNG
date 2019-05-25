@@ -63,7 +63,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onGoTo(){
-    //console.log(this.goTo)
     this.header.componentChanged = false;
     if (this.goTo) {
       this.router.navigate([this.goTo]);

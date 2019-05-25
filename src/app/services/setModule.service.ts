@@ -80,35 +80,29 @@ async setupModules(component: Comp) {
       }
     }
 
-    if (component.module && component.phoneFormat) {
-      const path = this.help.getRelativePath(component.path, '');
-      component.imports += this.temp.phoneDirectiveImport(path);
-      component.declarations += 'PhoneFormatDirective, '
+    if (component.phoneFormat) {
+      let path = this.help.getRelativePath(this.project.components[component.moduleIndex].path, '');
+      if (component.module) {
+        path = this.help.getRelativePath(component.path, '');
+        component.imports += this.temp.phoneDirectiveImport(path);
+        component.ngModuleImports += 'DirectivesModule, ';
+      } else {
+        this.project.components[moduleIndex].imports += this.temp.phoneDirectiveImport(path);
+        this.project.components[moduleIndex].ngModuleImports += 'DirectivesModule, ';
+      }
     }
   }
 }
 
 setPath(component: Comp, parentIndex, moduleIndex) {
-  //console.log(component)
-  //console.log(parentIndex)
-  //console.log(moduleIndex)
   let path = component.path.slice(this.project.components[parentIndex].path.length);
-  //console.log(path)
   if (moduleIndex === 0) {
     path = component.path.slice(4);
-    //console.log(path)
   }
   if (parentIndex === moduleIndex) {
-    ///console.log(path)
-  path = '';
+    path = '';
   }
-  /* if ((parentIndex === moduleIndex) || component.component && component.module) {
-    console.log(path)
-  path = '';
-  } */
-  //console.log(path)
   return path;
-   
  }
 
 }

@@ -105,7 +105,6 @@ return `
     Welcome to {{ title }}!
   </h1>
 </div>
-<h2 style="text-align:center">Thanks for using Ng-EZ</h2>
 <h2>Your links </h2>
 <ul>
   ${li}
@@ -269,7 +268,7 @@ children: [
     }
 
     phoneDirectiveImport(path){
-        return 'import { PhoneFormatDirective } from \'' + path + 'directives/phone-format.directive\';\n';
+        return 'import { DirectivesModule } from \'' + path + 'directives/directives.module\';\n';
     }
 
     authGuard(){
@@ -442,7 +441,6 @@ export class PhoneFormatDirective {
 
   @HostListener('keypress', ['$event'])
     keyEvent(event: KeyboardEvent) {
-    console.log(event.charCode);
     if (!(event.charCode > 47 && event.charCode < 58 || event.charCode == 42)) {
       return false;
     }
@@ -468,5 +466,18 @@ export class PhoneFormatDirective {
   }
 }
   `
+}
+
+directivesModule(){
+  return `
+import { NgModule } from '@angular/core';
+import { PhoneFormatDirective } from './phone-format.directive';
+
+@NgModule({
+  imports: [],
+  declarations: [PhoneFormatDirective],
+  exports: [PhoneFormatDirective]
+})
+export class DirectivesModule { }`
 }
 }

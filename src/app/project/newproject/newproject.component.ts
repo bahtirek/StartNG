@@ -41,6 +41,7 @@ export class NewprojectComponent implements OnInit {
 
   createProject() {
     if (this.newProjectName !== '') {
+      this.newProjectName = this.newProjectName.trim();
       if (this.pid) {
         if (!this.projectsServices.renameProject(this.newProjectName, this.pid)) {
           this.projectExistModal = true;

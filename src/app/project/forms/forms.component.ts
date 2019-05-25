@@ -1,5 +1,5 @@
 import { HeaderService } from '../../services/header.service';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 import { ActivatedRoute, Params} from '@angular/router';
 import { HelperService } from '../../services/helper.service';
@@ -30,7 +30,8 @@ export class FormsComponent implements OnInit {
   value: boolean = false;
   phoneFormatString = '';
   phoneFormatStringElse: string;
-
+  @ViewChild('propertyName') propertyName;
+  @ViewChild('label') label;
 
   constructor(private header: HeaderService,private location: Location, private projectsService: ProjectsServices, private route: ActivatedRoute, private help: HelperService) { }
 
@@ -129,6 +130,9 @@ export class FormsComponent implements OnInit {
   }
 
   remove(index){
+    if (this.component.forms[index].inputType === 'phone') {
+      this.component.phoneFormat = true;
+    }
     this.component.forms.splice(index, 1);
     this.projectsService.saveToLoc(this.project);
     this.saveProject = true;
@@ -151,6 +155,7 @@ export class FormsComponent implements OnInit {
     } else {
       this.formFields = {label: '', propertyName: '', placeholder: '', inputType: 'text', required: false, minLength: '', maxLength: '', value: ''};
     }
+    this.resetNgModel();
   }
 
   onInputTypeChange (inputType) {
@@ -219,5 +224,10 @@ export class FormsComponent implements OnInit {
   editPhoneFormat(){
     this.phoneFormatString = '';
     this.phoneFormatStringElse = '';
+  }
+
+  resetNgModel(){
+    this.propertyName.reset();
+    this.label.reset();
   }
 }

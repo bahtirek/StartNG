@@ -46,6 +46,7 @@ export class ZipService {
     let promisesFiles = [];
     const self = this;
     console.log(JSON.stringify(this.project))
+    //console.log(JSON.parse(JSON.stringify(this.project)))
     for (const component of this.project.components) {
       promisesModule.push(this.setModule.setupModules(component));
     }
@@ -65,7 +66,8 @@ export class ZipService {
             }
             if(this.project.phoneFormat) {
               const folder = this.zip.folder('app/directives');
-              folder.file('phone-format.directive.ts', this.template.phoneDirective(this.project.phone.formatOne, this.project.phone.formatTwo, this.project.phoneFormat.length))
+              folder.file('phone-format.directive.ts', this.template.phoneDirective(this.project.phone.formatOne, this.project.phone.formatTwo, this.project.phoneFormat.length));
+              folder.file('directives.module.ts', this.template.directivesModule());
             }
             this.zip.generateAsync({type:"blob"}).then((content) => {
               const projectName = self.project.name + '.zip';

@@ -113,7 +113,7 @@
                 <br>
                 <a *ngIf="(component.id > 2 && component.component)" [routerLink]="['/project/forms', project.name, component.id]" class="btn btn-link">Create/Edit form</a>
                 
-              <div [ngClass]="{'component-name-form': editName}">
+              <div>
                     <h4> Add child component</h4>
                   <form>
                       <section class="form-block add-comp">
@@ -210,7 +210,7 @@
     <p>Couldn't remove router-outlet because {{component.name}} component has lazy child</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="routerCheckbox(true)">Ok</button>
+    <button type="button" class="btn btn-primary" (click)="inRouterCheckbox(true)">Ok</button>
   </div>
 </clr-modal>
 
@@ -248,7 +248,7 @@
                     placeholder="Component name" 
                     size="40"
                     required
-                    (keyup.enter)="updateComponentName()" 
+                    (keyup.enter)="onUpdateComponentName()" 
                     [(ngModel)]="editComponentName.name"
                     #editComponentNameRef="ngModel">
               </div>

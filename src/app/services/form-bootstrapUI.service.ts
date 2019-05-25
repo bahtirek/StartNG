@@ -9,7 +9,7 @@ constructor() { }
 
 form(formGroups){
   return `
-  <div class="d-flex justify-content-md-start">
+  <div class="d-flex justify-content-md-center">
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
   ${formGroups}
   <div class="mt-4">

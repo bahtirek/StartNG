@@ -224,8 +224,10 @@ constructor(private projectsService: ProjectsServices) {
   getRelativePath(path: string, parentModulePath: string): any {
     let altPath = './';
     let pathArray: string[];
+    if(path === '') return altPath;
     if(parentModulePath === '') {
       pathArray = path.split('/');
+      //console.log(pathArray)
     } else {
       path = path.slice(parentModulePath.length);
       pathArray = path.split('/');
@@ -233,6 +235,7 @@ constructor(private projectsService: ProjectsServices) {
     for (let i = 0; i < pathArray.length-1; i++) {
       altPath += '../';   
     if(i === pathArray.length -2){
+      //console.log(altPath)
       return altPath;
     }
   }
