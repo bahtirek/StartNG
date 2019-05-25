@@ -1,0 +1,79 @@
+<clr-header>
+  <div class="branding">
+    <a routerLink="" class="nav-link">
+      
+      <span class="title">StartNG</span>
+    </a>
+  </div>
+  <div class="header-nav" [clr-nav-level]="1" *ngIf="isUserLogged">
+    <a routerLink="" (click)="onComponentLeave('project/projects')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+      class="nav-link"><span class="nav-text">Projects</span></a>
+    <a routerLink="" (click)="onComponentLeave('project/newproject')" routerLinkActive="active"
+      [routerLinkActiveOptions]="{exact: true}" class="nav-link"><span class="nav-text">New project</span></a>
+
+  </div>
+
+  <div class="header-nav right" [clr-nav-level]="1" *ngIf="!isUserLogged">
+    <a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link"><span
+        class="nav-text">Login</span></a>
+    <a routerLink="/signup" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link"><span
+        class="nav-text">Signup</span></a>
+
+  </div>
+  
+  <div class="header-actions header-actions-right">
+
+    <div *ngIf="isUserLogged">
+      <a class="nav-link nav-icon" title="Download project" *ngIf="isComponent" (click)="download()">
+        <clr-icon shape="download"></clr-icon>
+      </a>
+      <a class="nav-link nav-icon" title="Save project" *ngIf="isComponent" (click)="saveProject()">
+        <clr-icon shape="floppy"></clr-icon>
+      </a>
+      <clr-dropdown>
+        <a class="nav-link nav-icon" title="Settings" clrDropdownTrigger>
+          <clr-icon shape="cog"></clr-icon>
+        </a>
+
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a (click)="logout()" clrDropdownItem>Log out</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+
+  </div>
+</clr-header>
+
+
+<clr-modal [(clrModalOpen)]="saveComponentModal">
+  <h3 class="modal-title">Save changes</h3>
+  <div class="modal-body">
+    <p>Do you want to save changes before leave?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="saveProject()">Save</button>
+    <button type="button" class="btn btn-primary" (click)="onGoTo()">Don't save</button>
+    <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+  </div>
+</clr-modal>
+
+
+<clr-modal [(clrModalOpen)]="projectSavedModal" [clrModalSize]="'sm'">
+  <h3 class="modal-title">Project saved</h3>
+  <div class="modal-body">
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="onGoTo()">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="projectNotSavedModal" [clrModalSize]="'sm'">
+  <h3 class="modal-title">Project is not saved</h3>
+  <div class="modal-body">
+    Error!
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="projectNotSavedModal = false">Ok</button>
+  </div>
+</clr-modal>

@@ -1,0 +1,49 @@
+.tree-node{
+    /* margin-left: 0.5rem; */
+}
+
+.vertical{
+    display: flex;
+}
+
+.vertical-line{
+    width: 0.5rem;
+    border-right: 1px solid black;
+    margin-top: -6px;
+    margin-bottom: 11px;
+    margin-left: 3px;
+    
+}
+
+
+.horizontal-line{
+    width: 0.5rem;
+    background-color: black;
+    height: 2px;
+    align-self: center
+    /* border-top: 1px solid black; */
+    
+    /* margin-top: -6px;
+    margin-bottom: 11px; */
+}
+
+.parent{
+    display: flex;
+}
+
+clr-icon{
+    margin-right: 0.2rem;
+    fill: rgb(211, 210, 210);
+}
+
+a{
+    color: inherit;
+}
+
+a:hover{
+    color: blue;
+}
+
+.active{
+    color: red;
+}

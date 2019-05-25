@@ -1,0 +1,26 @@
+/* .form-group{
+    padding-left: 0;
+} */
+
+.login-box{
+    width: 500px;
+} 
+
+input {
+    margin-left: 0;
+}
+
+.lbl {
+    display: none;
+}
+
+@media (min-width:575px)  { 
+    
+    .lbl {
+        display: inline;
+    }
+
+    input {
+        margin-left: 2rem;
+    }
+}

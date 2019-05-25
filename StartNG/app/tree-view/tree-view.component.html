@@ -1,0 +1,34 @@
+<div  *ngFor="let child of component.children; let i=index">
+<div class="parent">
+  <div class="horizontal-line"></div>
+  <a [routerLink]="['/project/', project.name, child.id]" role="tooltip" aria-haspopup="true" 
+      [ngClass]="{'active': child.active}" (click)="childActive(child, component.id, i)"
+
+    class="tooltip tooltip-md tooltip-top-right">
+    {{child.name}}
+    <span class="tooltip-content">Review component</span>
+  </a>
+  </div>
+  <ng-container *ngIf="childrenQuantity(child.id) > 0; else file">
+    <div class="parent">
+      <div class="vertical">
+      <div class="vertical-line"></div>
+      <!-- <div class="vertical-line" [ngStyle]="{'height.px': getHeight()}" #line></div> -->
+    </div>
+      <div class="child">
+        <app-tree-view *ngIf="childrenQuantity(child.id) > 0" [componentName]="child.id"></app-tree-view>
+      </div>
+
+    </div>
+  </ng-container>
+ <!--  <ng-template #file>
+    <div class="parent">
+      <div class="child">
+        <app-tree-view *ngIf="childrenQuantity(child.id) > 0" [componentName]="child.id"></app-tree-view>
+      </div>
+
+    </div>
+  </ng-template> -->
+
+
+</div>

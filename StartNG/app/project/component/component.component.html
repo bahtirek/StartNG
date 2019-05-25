@@ -1,0 +1,262 @@
+<!-- <h3>{{parentComponentName}}-component</h3> -->
+      <div class="card">
+        <div class="card-header">
+            {{component.name}} component
+            <a *ngIf="component.name!=='app'" (click)="onEditComponentName(component.name)" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                <clr-icon shape="pencil" class="" ></clr-icon>
+                <span class="tooltip-content">Edit component name</span>
+              </a>
+        </div>
+        <div class="card-block">
+                <section class="form-block" *ngIf="component.name=='app'">
+                        <div class="form-group css">
+                            <div class="checkbox">
+                                <input type="checkbox" id="scss" name="scss" [(ngModel)]="project.scss" #css>
+                                <label for="scss">SCSS</label>
+                            </div>
+                        </div>
+                    </section>
+            <form class="pd-0 mr-0">
+                <ng-container *ngIf="component.name=='app' || component.name=='auth' || component.name=='login'; else notApp">
+                    
+                </ng-container>
+                <ng-template #notApp>
+                    <section class="form-block pd-0 mr-0" >
+                        <div class="form-group pd-0 mr-0">
+                            <div class="checkbox" [ngClass]="{'disabled': (component.module || component.component)}">
+                                <input type="checkbox" id="folder" name="folder" [(ngModel)]="component.folder" (change)="typeCheckbox(component.folder, 'folder')" [disabled]="(component.module || component.component)" #folder>
+                                <label for="folder">Folder</label>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="form-block pd-0 mr-0" >
+                        <div class="form-group pd-0 mr-0">
+                            <div class="checkbox" [ngClass]="{'disabled': component.folder}">
+                                <input type="checkbox" id="component" name="component" [(ngModel)]="component.component" (change)="typeCheckbox(component.component, 'component')" [disabled]="(component.folder)" >
+                                <label for="component">Component (ts, html, css files)</label>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="form-block pd-0 mr-0" *ngIf="component.name!=='app'">
+                        <div class="form-group pd-0 mr-0">
+                            <div class="checkbox" [ngClass]="{'disabled': component.folder}">
+                                <input type="checkbox" id="lazy" name="lazy" [(ngModel)]="component.lazyLoading" (change)="typeCheckbox(component.lazyLoading, 'lazy')" [disabled]="(component.folder)" #lazy>
+                                <label for="lazy">Lazy module</label>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="form-block mb-0 mt-0" *ngIf="component.lazyLoading && !component.component">
+                            <div class="form-group mb-0">
+                                    <label for="defaultComponent">Default Component</label>
+                                    <div class="select">
+                                        <select class="invalid" id="defaultComponent" name="defaultComponent" [(ngModel)]="component.defaultComponent" (change)="onDefaultComponent(component.defaultComponent)">
+                                                <option class="invalid" value="">Choose default component</option> 
+                                                <option *ngIf="component.component">{{component.name}}</option> 
+                                            <ng-container *ngFor="let child of project.components"  >                                                      
+                                                    
+                                                    <option *ngIf="(child.parentModule==component.name && child.component)">{{child.name}}</option>
+                                                </ng-container>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                    </section>
+                    <section class="form-block pd-0 mr-0" >
+                        <div class="form-group pd-0 mr-0">
+                            <div class="checkbox" [ngClass]="{'disabled': (component.folder || component.lazyLoading)}">
+                                <input type="checkbox" id="routingmodule" name="routingmodule" [(ngModel)]="component.routingModule" (change)="typeCheckbox(component.routingModule, 'routing')" [disabled]="(component.folder || component.lazyLoading)" #routingmodule>
+                                <label for="routingmodule">Routing module</label>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="form-block pd-0 mr-0" >
+                        <div class="form-group pd-0 mr-0">
+                            <div class="checkbox" [ngClass]="{'disabled': (component.folder || component.routingModule || component.lazyLoading)}">
+                                <input type="checkbox" id="module" name="module" [(ngModel)]="component.module" (change)="typeCheckbox(component.module, 'module')" [disabled]="(component.folder || component.routingModule || component.lazyLoading)" #module>
+                                <label for="module">Module</label>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="form-block pd-0 mr-0" *ngIf="component.name!=='app'">
+                        <div class="form-group pd-0 mr-0">
+                            <div class="checkbox" [ngClass]="{'disabled': (component.parentAuth || component.folder)}">
+                                <input type="checkbox" id="authentication" name="authentication" [(ngModel)]="component.authentication" [disabled]="(component.parentAuth || component.folder)" #authentication>
+                                <label for="authentication">Authentication (canActivate)</label>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="form-block pd-0 mr-0" *ngIf="component.name!=='app'">
+                        <div class="form-group pd-0 mr-0">
+                            <div class="checkbox" [ngClass]="{'disabled': component.folder}">
+                                <input type="checkbox" id="childAuthentication" name="childAuthentication" [(ngModel)]="component.childAuthentication" (change)="childAuthCheckbox(component.childAuthentication)" [disabled]="component.folder" #childAuthentication>
+                                <label for="childAuthentication">Child Authentication (canActivateChild)</label>
+                            </div>
+                        </div>
+                    </section>
+                
+                    <section class="form-block pd-0 mr-0" *ngIf="component.component || (component.module && !component.routingModule && !component.lazyLoading)">
+                        <div class="form-group pd-0 mr-0">
+                            <div class="checkbox">
+                                <input type="checkbox" id="inRouter" name="inRouter" [(ngModel)]="component.inRouter" (change)="inRouterCheckbox(component.inRouter)"  [disabled]="component.lazyLoading" #inRouterBox>
+                                <label for="inRouter">Link to parent's router-outlet</label>
+                            </div>
+                        </div>
+                    </section>  
+                </ng-template>
+                
+                    
+
+                            
+                    
+                </form>
+                <br>
+                <a *ngIf="(component.id > 2 && component.component)" [routerLink]="['/project/forms', project.name, component.id]" class="btn btn-link">Create/Edit form</a>
+                
+              <div>
+                    <h4> Add child component</h4>
+                  <form>
+                      <section class="form-block add-comp">
+                        <div class="form-group">
+                              <label for="newChildName">Component name</label>
+                              <input 
+                                type="text" 
+                                id="newChildName" 
+                                name="newChildName" 
+                                placeholder="Component name" 
+                                size="40"
+                                required
+                                (keyup.enter)="onAddComponent()" 
+                                [(ngModel)]="newChildName"
+                                #newChildNameRef="ngModel">
+                          </div>
+                      </section>
+                      <section class="form-block mt-0">
+                        <div class="form-group mb-0">
+                            <label for="componentType">Choose type:</label>
+                            <div class="select">
+                                <select class="invalid" id="componentType" name="componentType" [(ngModel)]="componentType" >
+                                    <option value="folder">Folder</option>
+                                    <option value="component">Component</option>
+                                    <option value="module">Module (routing, lazy)</option>
+                                </select>
+                               </div>
+                        </div>
+                    </section>
+                    </form> 
+                    <button class="btn btn-outline" [disabled]="!newChildNameRef.valid" (click)="onAddComponent()">Add</button>
+                    <button class="btn btn-primary"  (click)="newChildName=''">Cancel</button>
+              </div>
+
+              
+              <div>
+                
+                  <table class="table">
+                      <thead>
+                          <tr >
+                              <th class="left">Component name</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let child of component.children; let childIndex=index">
+                              <td class="component-name left">
+                                    <a [routerLink]="['/project/', project.name,child.id]" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                                        {{child.name}}
+                                            <span class="tooltip-content">Review component</span>
+                                          </a>
+                              </td>
+                              
+                              <td class="component-edit right">
+                                <!--   <a (click)="onEditComponentName(childIndex, child.id, child.name)" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left">
+                                  <clr-icon shape="pencil" class="pencil trash" ></clr-icon>
+                                  <span class="tooltip-content">Edit component name</span>
+                                </a> -->
+                                <ng-container *ngIf="expression"></ng-container>
+                                <a (click)="onDeleteComponentModal(childIndex, child.name, child.id)" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-left"
+                                *ngIf="child.name !== 'auth' && child.name !== 'login'">
+                                  <clr-icon shape="trash" class="trash rem-left-1"></clr-icon>
+                                  <span class="tooltip-content">Delete component</span>
+                                </a>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              
+              </div>
+             
+              
+          </div>
+          <div class="card-footer">
+               
+          </div>
+      </div>
+<clr-modal [(clrModalOpen)]="showDeleteComponentModal.show">
+  <h3 class="modal-title">Delete components</h3>
+  <div class="modal-body">
+    <p>Do you want to delete this component and children?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="cancelDeleteComponent()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onDeleteComponent()">Delete all</button>
+  </div>
+</clr-modal>
+
+
+
+<clr-modal [(clrModalOpen)]="routerModal">
+  <h3 class="modal-title">Remove router-outlet</h3>
+  <div class="modal-body">
+    <p>Couldn't remove router-outlet because {{component.name}} component has lazy child</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="inRouterCheckbox(true)">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="componentExistModal" [clrModalSize]="'sm'">
+  <h3 class="modal-title">Component exist</h3>
+  <div class="modal-body">
+    <p>Enter new component name.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="componentExistModal = false">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="componentNameNumberModal" [clrModalSize]="'sm'">
+  <h3 class="modal-title">Component name can't start with number.</h3>
+  <div class="modal-body">
+    <p>Enter new component name.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="componentNameNumberModal = false">Ok</button>
+  </div>
+</clr-modal>
+
+
+<clr-modal [(clrModalOpen)]="editComponentName.show">
+    <h3 class="modal-title">Edit component name</h3>
+    <div class="modal-body">
+        <section class="form-block add-comp">
+            <div class="form-group">
+                  <label for="editChildName">Component name</label>
+                  <input 
+                    type="text" 
+                    id="editComponentName" 
+                    name="editComponentName" 
+                    placeholder="Component name" 
+                    size="40"
+                    required
+                    (keyup.enter)="onUpdateComponentName()" 
+                    [(ngModel)]="editComponentName.name"
+                    #editComponentNameRef="ngModel">
+              </div>
+          </section>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="editComponentName.show = false">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="onUpdateComponentName()">Save</button>
+    </div>
+  </clr-modal>
+

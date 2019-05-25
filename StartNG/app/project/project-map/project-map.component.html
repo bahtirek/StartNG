@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">
+    {{project.name}}
+  </div>
+  <div class="card-block">
+    <div>
+      <a [routerLink]="['/project/', project.name, '0']" role="tooltip" aria-haspopup="true" class="tooltip tooltip-md tooltip-top-right">
+        
+        app
+        <span class="tooltip-content">Review component</span>
+      </a>
+      <div class="parent">
+          <div class="vertical-line"></div>
+      <div class="child">
+        <app-tree-view  [componentName]="0"></app-tree-view>
+      </div>
+    
+      </div>
+    </div>
+  </div>
+
+</div>

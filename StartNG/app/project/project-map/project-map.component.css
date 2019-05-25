@@ -1,0 +1,27 @@
+label {
+    font-weight: 100;
+    font-size: 0.6rem;
+    display: block;
+    color: #4c4747;
+}
+
+a{
+    color: inherit;
+    margin-left: 0.3rem;
+}
+clr-icon{
+    margin-right: 0.3rem;
+    fill: rgb(211, 210, 210);
+}
+
+.vertical-line{
+    width: 0.5rem;
+    border-right: 1px solid black;
+    margin-top: -6px;
+    margin-bottom: 11px;
+}
+
+
+.parent{
+    display: flex;
+}

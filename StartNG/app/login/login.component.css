@@ -1,0 +1,28 @@
+
+
+.login-box{
+    max-width: 500px;
+} 
+
+input {
+    margin-left: 0;
+}
+
+.lbl {
+    display: none;
+}
+
+.right {
+    float: right;
+}
+
+@media (min-width:575px)  { 
+    
+    .lbl {
+        display: inline;
+    }
+
+    input {
+        margin-left: 2rem;
+    }
+}
