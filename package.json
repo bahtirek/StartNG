@@ -30,7 +30,7 @@
     "core-js": "^2.5.7",
     "file-saver": "^2.0.0-rc.4",
     "firebase": "^5.8.2",
-    "jszip": "^3.1.5",
+    "jszip": "^3.7.0",
     "rxjs": "^6.5.1",
     "rxjs-compat": "^6.5.1",
     "stream": "0.0.2",
